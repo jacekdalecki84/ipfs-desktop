@@ -129,18 +129,22 @@ const on = 'on'
 const off = 'off'
 
 function icon (color) {
-  const useColoredIcon = false // TODO: setting for macOS users
+  const useColoredIcon = true // TODO: setting for macOS users
   const dir = path.resolve(path.join(__dirname, '../../assets/icons/tray'))
 
+  if (IS_WIN) {
+    return path.join(dir, `${color}.ico`)
+  }
+
   if (!IS_MAC) {
-    return path.join(dir, `${color}-big.png`)
+    return path.join(dir, `${color}-64.png`)
   }
 
   if (useColoredIcon) {
-    return path.join(dir, `${color}.png`)
+    return path.join(dir, `${color}-22.png`)
   }
 
-  return path.join(dir, `${color}Template.png`)
+  return path.join(dir, `${color}-22Template.png`)
 }
 
 export default function (ctx) {
